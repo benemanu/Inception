@@ -5,8 +5,8 @@ RUN apt-get update && apt-get install -y \
     php-fpm \
     php-mysql
 
-COPY ./config/www.conf /etc/php/7.3/fpm/pool.d/
-COPY ./config/wp-config.php /
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
+COPY ./conf/wp-config.php /
 
  RUN mkdir -p /run/php && chown www-data:www-data /run/php
 

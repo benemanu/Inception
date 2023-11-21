@@ -14,7 +14,7 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 
 RUN rm -f /etc/nginx/sites-enabled/default
 
-COPY config/default /etc/nginx/sites-available
+COPY conf/default /etc/nginx/sites-available
 RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
 EXPOSE 443
