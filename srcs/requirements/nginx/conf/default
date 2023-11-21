@@ -2,7 +2,7 @@ server {
 	listen 443 ssl;
 	listen [::]:443 ssl;
 
-	server_name www.login.1337.ma login.1337.ma;
+	server_name www.bhielsch.1337.ma bhielsch.1337.ma;
 
 	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
 	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;

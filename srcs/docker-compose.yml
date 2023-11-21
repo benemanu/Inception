@@ -1,54 +1,58 @@
 version: "3"
 
 volumes:
-        wordpress:
-                name: wordpress
-                driver: local
-                driver_opts: 
-                      device: /home/bhielsch/data/wordpress
-                      o: bind
-        
-        mariadb:
-                name: mariadb
-                driver: local
-                driver_opts: 
-                        device: /home/bhielsch/data/mysql
-                        o: bind
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts: 
+      device: /home/bhielsch/data/wordpress
+      o: bind
+      type: none
+    
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts: 
+      device: /home/bhielsch/data/mysql
+      o: bind
+      type: none
 
 networks:
   inception: 
-      name: inception
-      driver: bridge
+    name: inception
+    driver: bridge
 
 services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb/
     volumes:
-    	-mariadb:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     env_file:
-    	- .env
-    	networks:
-    	  - inception
+      - .env
+    networks:
+      - inception
+
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/
     depends_on: 
-      -mariadb
+      - mariadb
     volumes: 
-      -wordpress:/var/www/html
+      - wordpress:/var/www/html
     env_file:
-      -.env
+      - .env
     networks: 
-      -inception
+      - inception
     restart: always
+
   nginx:
     container_name: nginx
     build: ./requirements/nginx/
     ports:
       - "443:443"
     volumes:
-      -wordpress:/var/www/html
+      - wordpress:/var/www/html
     networks:
       - inception
     restart: always
